@@ -21,3 +21,4 @@ resource "aws_instance" "my_ec2" {
 
   tags = var.instance_tags
 }
+
