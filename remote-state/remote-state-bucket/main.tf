@@ -34,6 +34,21 @@ resource "aws_s3_bucket_versioning" "remote_state" {
     }
 }
 
+resource "aws_dynamodb_table" "lock-table" {
+  name = "tflock-${aws_s3_bucket.this.bucket}"
+
+  read_capacity = 5
+
+  write_capacity = 5
+
+  hash_key = "LockID"
+
+  attribute {
+    name = "LockID"
+    type = "S"
+  }
+}
+
 output "aws_bucket_id" {
   value = aws_s3_bucket.this.id
 }
